@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday!</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    overflow:hidden;
+    background:linear-gradient(
+        135deg,
+        #dff6ff,
+        #b8e8fc,
+        #e5d9ff
+    );
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+}
+
+/* Floating hearts */
+.heart{
+    position:absolute;
+    color:#ff7eb6;
+    animation:float 8s linear infinite;
+    opacity:.7;
+}
+
+@keyframes float{
+    from{
+        transform:translateY(100vh);
+    }
+    to{
+        transform:translateY(-120px);
+    }
+}
+
+/* Card */
+.card{
+    width:90%;
+    max-width:420px;
+    padding:30px;
+    border-radius:25px;
+    background:rgba(255,255,255,0.25);
+    backdrop-filter:blur(12px);
+    border:1px solid rgba(255,255,255,0.3);
+    text-align:center;
+    box-shadow:0 8px 30px rgba(0,0,0,0.15);
+    z-index:10;
+    animation:pop 1s ease;
+}
+
+@keyframes pop{
+    from{
+        opacity:0;
+        transform:scale(.7);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+h1{
+    color:#0f4c75;
+    font-size:2.4rem;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    color:#4f6d7a;
+    margin-bottom:20px;
+}
+
+.message{
+    color:#2f4858;
+    line-height:1.7;
+    font-size:1rem;
+    margin-bottom:25px;
+}
+
+/* Cake */
+.cake{
+    font-size:4rem;
+    animation:bounce 1.5s infinite;
+}
+
+@keyframes bounce{
+    50%{
+        transform:translateY(-10px);
+    }
+}
+
+button{
+    border:none;
+    background:linear-gradient(45deg,#7dd3fc,#c084fc);
+    color:white;
+    padding:12px 25px;
+    border-radius:30px;
+    cursor:pointer;
+    font-size:1rem;
+    font-weight:600;
+    transition:.3s;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+#extraMessage{
+    margin-top:20px;
+    color:#0f4c75;
+    font-weight:600;
+    display:none;
+}
+
+/* Confetti */
+.confetti{
+    position:absolute;
+    width:10px;
+    height:10px;
+    top:-10px;
+    animation:fall linear forwards;
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(110vh) rotate(720deg);
+    }
+}
+
+@media(max-width:480px){
+    h1{
+        font-size:2rem;
+    }
+
+    .message{
+        font-size:.95rem;
+    }
+
+    .cake{
+        font-size:3.5rem;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+    <div class="cake">🎂</div>
+
+    <h1>Happy Birthday!</h1>
+
+    <p class="subtitle">
+        Wishing you a day filled with happiness, laughter, and unforgettable memories.
+    </p>
+
+    <p class="message">
+        May every dream you hold come closer to reality, and may this year bring endless joy,
+        success, and beautiful moments into your life. ✨💙
+    </p>
+
+    <button onclick="showWish()">
+        Open Birthday Wish 🎁
+    </button>
+
+    <div id="extraMessage">
+        🌸 You are appreciated, loved, and truly special. May your year be as wonderful as you are! 🌸
+    </div>
+</div>
+
+<script>
+// Confetti Generator
+function createConfetti() {
+    const colors = [
+        "#7dd3fc",
+        "#c084fc",
+        "#ff7eb6",
+        "#ffffff",
+        "#38bdf8"
+    ];
+
+    for(let i=0;i<120;i++){
+        const confetti=document.createElement("div");
+        confetti.classList.add("confetti");
+
+        confetti.style.left=Math.random()*100+"vw";
+        confetti.style.background=
+        colors[Math.floor(Math.random()*colors.length)];
+
+        confetti.style.width=
+        Math.random()*10+5+"px";
+
+        confetti.style.height=
+        Math.random()*10+5+"px";
+
+        confetti.style.animationDuration=
+        Math.random()*3+3+"s";
+
+        document.body.appendChild(confetti);
+
+        setTimeout(()=>{
+            confetti.remove();
+        },7000);
+    }
+}
+
+// Floating Hearts
+for(let i=0;i<15;i++){
+    const heart=document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML="❤";
+
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=Math.random()*20+15+"px";
+    heart.style.animationDuration=Math.random()*5+5+"s";
+
+    document.body.appendChild(heart);
+}
+
+createConfetti();
+
+setInterval(createConfetti,6000);
+
+function showWish(){
+    document.getElementById("extraMessage").style.display="block";
+    createConfetti();
+}
+</script>
+
+</body>
+</html>
